@@ -8,8 +8,18 @@
   },
   "detail": {
     "contributors": [],
-    "diagrams": [],
-    "diagramTop": 0,
+    "diagrams": [
+      {
+        "id": 0,
+        "title": "GetTogether STRIDE diagram",
+        "diagramType": "STRIDE",
+        "placeholder": "New STRIDE diagram description",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "version": "2.0.3",
+        "description": "GetTogether STRIDE diagram for Security Portfolio"
+      }
+    ],
+    "diagramTop": 2,
     "reviewer": "",
     "threatTop": 0
   }
