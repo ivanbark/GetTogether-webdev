@@ -137,16 +137,10 @@ namespace API.Controllers
         [HttpDelete("removeMember/{userid}/{groupid}")]
         public async Task<IActionResult> DeleteGroup(string userid, int groupid)
         {
-            var loggedInUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
             var group = await _context.Groups.FindAsync(groupid);
             if (group == null)
             {
                 return NotFound();
-            }
-            else if (group.OwnerId != loggedInUserId)
-            {
-                return Unauthorized();
             }
             else if (group.OwnerId == userid)
             {
