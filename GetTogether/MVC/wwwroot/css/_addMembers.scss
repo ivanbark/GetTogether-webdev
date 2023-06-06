@@ -1,0 +1,111 @@
+﻿.addMemberHeader {
+    padding: 70px;
+}
+
+#memberForm {
+    padding: 0 30px;
+}
+
+.addMembersContent {
+    margin: 60px auto;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 10%;
+
+    .left {
+        width: 50%;
+        height: 500px;
+        width: 50%;
+        height: 500px;
+        border: 4px solid $mainColor;
+        border-radius: 15px;
+        padding: 30px;
+
+        input {
+            border-radius: 15px;
+            padding: 5px 20px;
+            width: 100%;
+            position: relative;
+        }
+
+        .btn {
+            width: 100%;
+            margin: 10px 0 20px 0;
+            padding: 10px 0;
+
+            i {
+                margin-left: 10px;
+            }
+        }
+
+        table {
+            overflow-y: scroll;
+
+            tr {
+                td {
+                    &:nth-child(2) {
+                        max-width: 165px;
+                        overflow: hidden;
+                    }
+
+                    button {
+                        color: green;
+                    }
+                }
+            }
+        }
+    }
+
+    .rigth, .left {
+        width: 50%;
+        height: 500px;
+        border: 4px solid $mainColor;
+        border-radius: 15px;
+        padding: 30px 0;
+
+        .list {
+            overflow-y: scroll;
+            height: 320px;
+            padding: 0 30px;
+        }
+
+        h3 {
+            color: $mainColor;
+            font-weight: bold;
+            margin-bottom: 30px;
+            padding: 0 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 5px;
+
+            td {
+                margin: 10px;
+
+                &:first-child {
+                    width: 80px;
+                }
+
+                &:last-child {
+                    width: fit-content;
+                    text-align: right;
+                }
+
+                button {
+                    border: none;
+                    color: #e53636;
+                    background: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,70 @@
+﻿@model MVC.Areas.Identity.Data.ApplicationDbContext
+@using System.Security.Claims;
+@using MVC.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Main";
+
+    var UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+    var isOwnerOf = Model.Groups.Where(g => g.OwnerId == UserId);
+    var isMemberOf = new List<Group>();
+    foreach (var group in Model.Groups)
+    {
+        var agList = Model.ApplicationUserGroups.Where(ag => ag.GroupId == group.Id);
+        foreach (var ag in agList)
+        {
+            if (UserId == ag.MemberId && !isOwnerOf.Contains(group)) { isMemberOf.Add(group); }
+        }
+    }
+    var groups = new List<Group>();
+    groups.AddRange(isOwnerOf);
+    groups.AddRange(isMemberOf);
+
+    var user = await UserManager.GetUserAsync(User);
+}
+
+<div class="screenHeader">
+    <div class="headerContent">
+        <div class="initalIcon" id="nameInitial">
+            @user.Name.ToString()[0]
+        </div>
+        <div class="userInfo">
+            <h2>@user.Name</h2>
+            <p>@user.Email</p>
+
+            <form style="display:inline;" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <button type="submit" class="logoutBtn">Logout</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="groupList">
+    @foreach (var group in groups)
+    {
+        <a class="groupCardLink" asp-controller="Group" asp-action="GroupDetails" asp-route-id="@group.Id">
+            <div class="groupCard">
+                <div class="initalIcon">
+                    @group.Name.ToString()[0]
+                </div>
+                <h3>@group.Name (@Model.ApplicationUserGroups.Where(ag => ag.GroupId == group.Id).Count())</h3>
+                @if (group.OwnerId == UserId)
+                {
+                    <p>Owner: You</p>
+                }
+                else
+                {
+                    <p>Owner: @await UserManager.FindByIdAsync(group.OwnerId)</p>
+                }
+            </div>
+        </a>
+    }
+    <a asp-area="" asp-controller="Group" asp-action="AddGroup" class="btn addGroup">+</a>
+</div>
+
+
+
+

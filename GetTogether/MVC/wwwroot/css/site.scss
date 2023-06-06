@@ -1,0 +1,89 @@
+@import "_variables.scss";
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    transition: all .5s linear;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 4em;
+    font-weight: bold;
+}
+
+a {
+    color: $mainColor;
+}
+
+.content-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+footer {
+    height: fit-content;
+    background: transparent;
+    text-align: center;
+    color: #6c757d !important;
+}
+
+.btn {
+    padding: 15px 30px;
+    color: white !important;
+    background: $mainColor;
+    border-radius: 15px;
+    min-width: 150px;
+}
+.btn:hover {
+    background: $mainColorDark;
+}
+
+.btn-outline {
+
+}
+
+.initalIcon {
+    width: 250px;
+    height: 250px;
+    line-height: 200px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    border-radius: 100%;
+    background: $mainColor;
+    color: white;
+    font-size: 10em;
+}
+
+@import "_account.scss";
+@import "_home.scss";
+@import "_mainScreen.scss";
+@import "_groupDetails.scss";
+@import "_addMembers.scss";
+
+

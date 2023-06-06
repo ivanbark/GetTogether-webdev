@@ -1,0 +1,45 @@
+﻿@using System.Security.Claims
+@using MVC.Areas.Identity.Data
+@inject ApplicationDbContext _context
+
+@model Group
+
+@{
+    ViewData["Title"] = Model.Name;
+    
+    var UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+    var user = _context.Users.Find(UserId);
+}
+
+<a asp-area="" asp-controller="Home" asp-action="Main" class="back-btn group-back-btn">❮</a>
+<div class="screenHeader groupHeader">
+    <div class="headerContent">
+        <div class="groupInfo">
+            <div class="initalIcon" id="nameInitial">
+                @Model.Name.ToString()[0]
+            </div>
+            <div class="userInfo">
+                <h2>@Model.Name</h2>
+            </div>
+        </div>
+        <div>
+            <p>Members: @_context.ApplicationUserGroups.Where(ag => ag.GroupId == Model.Id).Count()</p>
+
+            @if (Model.OwnerId == UserId)
+            {
+                <a asp-area="" asp-controller="Group" asp-action="AddParticipants" asp-route-id="@Model.Id" class="btn addMembers">Toevoegen</a>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="chatContainer">
+    <input type="text" class="w-100" id="message" />
+    <input type="submit" id="sendButton" value="Send Message" />
+    
+    <ul id="chat"></ul>
+</div>
+@section Scripts {
+    <script src="~/js/microsoft-signalr/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
+}

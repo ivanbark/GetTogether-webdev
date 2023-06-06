@@ -1,0 +1,68 @@
+﻿@using MVC.Areas.Identity.Data
+@inject ApplicationDbContext _context
+
+@model Group
+
+@{
+    ViewData["Title"] = Model.Name;
+
+    //TODO: OWNER KAN NU MEMBERS VAN ANDERE GROUPS ADDEN EN REMOVEN !!!!
+
+}
+
+<a asp-area="" asp-controller="Home" asp-action="Main" class="back-btn group-back-btn">❮</a>
+
+<div class="screenHeader addMemberHeader">
+    <div class="headerContent ">
+        <div class="initalIcon" id="nameInitial">
+            @Model.Name.ToString()[0]
+        </div>
+        <div class="userInfo">
+            <h2>@Model.Name</h2>
+            <p id="memberCount">Members: @_context.ApplicationUserGroups.Where(ag => ag.GroupId == Model.Id).Count()</p>
+        </div>
+    </div>
+</div>
+<div class="addMembersContent">
+    <div class="left">
+
+        <form id="memberForm" method="POST">
+            <input type="hidden" value="@Model.Id" id="groupid" /> 
+            <input type="text" id="searchstring" required placeholder="Search"/>
+            <button type="submit" class="btn">Search <i class="fa fa-search"></i></button>
+        </form>
+
+        <div class="list">
+
+            <table id="users">
+            </table>
+
+        </div>
+        
+    </div>
+    <div class="rigth">
+        <h3>Members</h3>
+
+        <div class="list">
+            <table>
+                <tr>
+                    <td>@_context.Users.Find(Model.OwnerId).Name</td>
+                    <td>@_context.Users.Find(Model.OwnerId).Email</td>
+                    <td>Owner</td>
+                </tr>
+            </table>
+
+            <table id="currentMembers">
+            </table>
+        </div>
+        
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/memberFormHandling.js"></script>
+    <script>
+        getMembers(@Model.Id);
+    </script>
+}
+    

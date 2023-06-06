@@ -1,0 +1,11 @@
+﻿User-agent: *
+Disallow: /img/
+Disallow: /js/
+Disallow: /lib/
+Disallow: /css/
+
+User-agent: AdsBot-Google
+Disallow: /img/
+Disallow: /js/
+Disallow: /lib/
+Disallow: /css/

@@ -1,0 +1,60 @@
+form {
+    justify-content: center;
+    align-items: center;
+}
+
+.back-btn {
+    margin: 30px;
+    color: $mainColor !important;
+    background: transparent;
+    font-size: 3em;
+    position: absolute;
+
+    &:hover {
+        background: transparent;
+    }
+}
+
+#registerForm, .account-container {
+    height: 90vh;
+    max-width: 2200px;
+    margin: 0 auto; 
+
+    .btn {
+        width: 70%;
+    }
+
+    .form-container, .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        flex-wrap: wrap;
+        min-height: 350px;
+    }
+
+    .form-container .form-floating {
+        width: 100%;
+    }
+}
+
+.account-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .account-form-div, #account {
+        height: fit-content;    
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    h1 {
+        color: $mainColor;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 80px;
+    }
+}

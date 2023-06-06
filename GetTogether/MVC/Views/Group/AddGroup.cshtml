@@ -1,0 +1,43 @@
+﻿@using System.Security.Claims
+@model MVC.Models.Group
+
+@{
+    ViewData["Title"] = "Add group";
+}
+
+<div class="">
+    <a asp-area="" asp-controller="Home" asp-action="Main" class="back-btn btn">❮</a>
+    <div class="">
+        <form id="registerForm" class="row needs-validation" method="POST" asp-controller="Group" asp-action="AddGroup">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OwnerId" value="@User.FindFirst(ClaimTypes.NameIdentifier).Value" />
+            <div class="col-md-4 form-container">
+                <div class="form-floating mb-3">
+                    <input id="nameInput" asp-for="Name" class="form-control" autocomplete="name" aria-required="true" placeholder="name" onKeyPress="getFirstLetter()" onKeyUp="getFirstLetter()" />
+                    <label asp-for="Name">Group Name</label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea style="min-height:200px;" asp-for="Description" class="form-control" autocomplete="description" aria-required="true" placeholder="description"></textarea>
+                    <label asp-for="Description">Description</label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4 btn-container" style="">
+                <div class="initalIcon" id="nameInitial">
+                    ?
+                </div>
+                <button id="registerSubmit" type="submit" class="btn">Add Group</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+

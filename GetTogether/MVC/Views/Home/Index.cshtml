@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+@using Microsoft.AspNetCore.Identity
+@using MVC.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@model MVC.Areas.Identity.Data.ApplicationDbContext
+
+<style>
+    footer {
+        color: white !important;
+    }
+</style>
+<div class="home-container">
+    <div class="home-content">
+        <h1>GetTogether</h1>
+        <p>The best platform to plan and discuss activities!</p>
+        <div>
+            <p><span>@Model.Users.Count()</span> users signed up</p>
+            <p><span>@Model.Groups.Count()</span> groups created</p>
+        </div>
+        <div class="home-btns">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a asp-area="" asp-controller="Home" asp-action="Main" class="btn">Main</a>
+                if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <form style="display:inline;" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                        <button type="submit" class="btn">Logout</button>
+                    </form>
+                }
+            } else
+            {
+                <a class="btn" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                <a class="btn" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            }
+        </div>
+    </div>
+</div>
